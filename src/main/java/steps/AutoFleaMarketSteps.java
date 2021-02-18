@@ -55,11 +55,9 @@ public class AutoFleaMarketSteps {
     @Step("Validate founded brands on first page {expectedSize} expectedSize, {expectedBrand} expectedBrand")
     public AutoFleaMarketSteps validateFoundedBrandsOnFirstPage(int expectedSize, String expectedBrand) {
         List<String> models = autoFleaMarketPage.getModels();
-        List<String> brands = models.stream().map(model -> StringUtils.left(model, 13))
-            .collect(Collectors.toList());
-        Assert.assertEquals(brands.size(), expectedSize, "Brands number does not match expected");
-        brands.forEach(brand ->
-            Assert.assertEquals(brand, expectedBrand, "Brand name does not match expected"));
+        Assert.assertEquals(models.size(), expectedSize, "Brands number does not match expected");
+        models.forEach(model -> Assert.assertTrue(model.contains(expectedBrand),
+            "Brand name does not match expected"));
         return this;
     }
 
