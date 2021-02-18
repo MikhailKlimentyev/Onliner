@@ -23,7 +23,7 @@ public class OnlinerTest {
     public void setUp() {
         System.setProperty("console.encoding", "UTF-8");
         System.setProperty("file.encoding", "UTF-8");
-        String browser = System.getProperty("browser", "chrome");
+        String browser = System.getProperty("browser", "firefox");
         String driverPath = "src/main/resources/webdrivers";
         if (browser.equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", String.format("%s/chromedriver.exe", driverPath));
