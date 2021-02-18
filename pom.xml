@@ -16,6 +16,9 @@
         <selenium.java.version>3.141.59</selenium.java.version>
         <commons-lang3.version>3.10</commons-lang3.version>
         <maven.surefire.plugin.version>3.0.0-M4</maven.surefire.plugin.version>
+        <allure.testng.version>2.13.3</allure.testng.version>
+        <aspectj.version>1.9.6</aspectj.version>
+        <allure.maven.version>2.9</allure.maven.version>
     </properties>
 
     <dependencies>
@@ -34,6 +37,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.testng.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -43,10 +51,25 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven.version}</version>
             </plugin>
         </plugins>
     </build>

@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -17,11 +18,13 @@ public class AutoFleaMarketSteps {
         autoFleaMarketPage = new AutoFleaMarketPage(driver);
     }
 
+    @Step("Open auto flea market link")
     public AutoFleaMarketSteps openAutoFleaMarketLink() {
         autoFleaMarketPage.clickOnAutoFleaMarketLink().isPageOpened();
         return this;
     }
 
+    @Step("Select price {currency} currency, {fromPrice} fromPrice, {toPrice} toPrice")
     public AutoFleaMarketSteps selectPrice(String currency, String fromPrice, String toPrice) {
         autoFleaMarketPage.selectCurrency(currency)
             .enterFromPrice(fromPrice)
@@ -29,6 +32,7 @@ public class AutoFleaMarketSteps {
         return this;
     }
 
+    @Step("Open brand modal")
     public BrandSteps openBrandModal() {
         autoFleaMarketPage.clickOnBrandField()
             .isPageOpened();
@@ -36,6 +40,8 @@ public class AutoFleaMarketSteps {
         return new BrandSteps(driver);
     }
 
+    @Step("Validate search labels {expectedBrand} expectedBrand, {expectedFromPrice} expectedFromPrice," +
+        " {expectedToPrice} expectedToPrice")
     public AutoFleaMarketSteps validateSearchLabels(String expectedBrand, String expectedFromPrice, String expectedToPrice) {
         List<String> brandAndPriceInterval = autoFleaMarketPage.getBrandAndPriceInterval();
         Assert.assertEquals(brandAndPriceInterval.size(), 3,
@@ -46,6 +52,7 @@ public class AutoFleaMarketSteps {
         return this;
     }
 
+    @Step("Validate founded brands on first page {expectedSize} expectedSize, {expectedBrand} expectedBrand")
     public AutoFleaMarketSteps validateFoundedBrandsOnFirstPage(int expectedSize, String expectedBrand) {
         List<String> models = autoFleaMarketPage.getModels();
         List<String> brands = models.stream().map(model -> StringUtils.left(model, 13))
@@ -56,6 +63,7 @@ public class AutoFleaMarketSteps {
         return this;
     }
 
+    @Step("Validate USD price {expectedMinPrice} expectedMinPrice, {expectedMaxPrice} expectedMaxPrice")
     public AutoFleaMarketSteps validateUsdPrice(String expectedMinPrice, String expectedMaxPrice) {
         List<String> stringPrices = autoFleaMarketPage.getUsdEurPrices();
         List<Integer> prices = normalizePrices(stringPrices);
