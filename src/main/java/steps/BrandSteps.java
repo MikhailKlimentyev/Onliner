@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import pages.BrandModal;
 
@@ -11,6 +12,7 @@ public class BrandSteps {
         brandModal = new BrandModal(driver);
     }
 
+    @Step("Select brand {brand} brand")
     public AutoFleaMarketSteps selectBrand(String brand) {
         brandModal
             .enterTextIntoFindBrandInput(brand)

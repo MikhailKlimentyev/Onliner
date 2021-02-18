@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Feature;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +12,7 @@ import steps.StartSteps;
 
 import java.util.concurrent.TimeUnit;
 
+@Feature("OnlinerTest")
 public class OnlinerTest {
 
     private WebDriver driver;
@@ -20,7 +22,7 @@ public class OnlinerTest {
     public void setUp() {
         System.setProperty("console.encoding", "UTF-8");
         System.setProperty("file.encoding", "UTF-8");
-        String browser = System.getProperty("browser", "firefox");
+        String browser = System.getProperty("browser", "chrome");
         String driverPath = "src/main/resources/webdrivers";
         if (browser.equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", String.format("%s/chromedriver.exe", driverPath));
@@ -41,7 +43,7 @@ public class OnlinerTest {
         }
     }
 
-    @Test
+    @Test(description = "Test car search by brand and USD prices range")
     public void testCarSearchByBrandAndUsdPricesRange() {
         String brand = System.getProperty("brand", "Mercedes-Benz");
         String fromPrice = System.getProperty("fromPrice", "5000");
