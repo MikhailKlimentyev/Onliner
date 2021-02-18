@@ -35,3 +35,4 @@ master
 target
 out
 .allure
+allure-results/

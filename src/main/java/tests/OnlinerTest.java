@@ -4,6 +4,7 @@ import io.qameta.allure.Feature;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +27,9 @@ public class OnlinerTest {
         String driverPath = "src/main/resources/webdrivers";
         if (browser.equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", String.format("%s/chromedriver.exe", driverPath));
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            driver = new ChromeDriver(options);
+            options.addArguments("--no-sandbox");
         } else if (browser.equals("firefox")) {
             System.setProperty("webdriver.gecko.driver", String.format("%s/geckodriver.exe", driverPath));
             driver = new FirefoxDriver();
