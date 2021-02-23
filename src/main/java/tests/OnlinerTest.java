@@ -67,6 +67,11 @@ public class OnlinerTest {
             .validateUsdPrice(fromPrice, toPrice);
     }
 
+    @Test
+    public void test() {
+        Assert.assertTrue(false);
+    }
+
     private String getNormalizedPrice(String price) {
         String normalizedPrice = price;
         if (price.length() >= 5 && price.length() <= 6) {
